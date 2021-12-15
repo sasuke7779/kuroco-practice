@@ -1,5 +1,6 @@
 require('dotenv').config();
-const { BASE_URL } = process.env;
+// const { BASE_URL } = process.env;
+const BASE_URL = 'https://kuroco-practice.g.kuroco.app';
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
