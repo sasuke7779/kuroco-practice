@@ -1,3 +1,6 @@
+require('dotenv').config();
+const { BASE_URL } = process.env;
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -21,11 +24,15 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-  '@/assets/css/reset.css',
-  '@/assets/css/base.css',
-  '@/assets/css/plugin.css',
-  '@/assets/css/module.css'
+    '@/assets/css/reset.css',
+    '@/assets/css/base.css',
+    '@/assets/css/plugin.css',
+    '@/assets/css/module.css'
   ],
+
+  // router: {
+  //   trailingSlash: true
+  // },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -49,5 +56,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  env: {
+    BASE_URL
   }
 }
