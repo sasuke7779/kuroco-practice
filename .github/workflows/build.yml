@@ -79,3 +79,5 @@ jobs:
           webhook_url: "https://kuroco-practice.g.kuroco.app/direct/menu/github/"
           webhook_secret: "8dea626e162fde6416990728308eff27"
           data: '{"domain":"kuroco-practice.g.kuroco-front.app", "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
+
+  #test
