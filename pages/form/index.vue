@@ -2,6 +2,7 @@
     <div>
         <h1>FORMページ</h1>
 
+
         <form v-if="!submitted" ref="form" enctype="multipart/form-data">
             <div v-if="error" class="error">
                 <p v-for="(err, idx) in error" :key="idx">{{ err }}</p>
