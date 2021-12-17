@@ -46,21 +46,32 @@
         },
         methods: {
             async signup() {
-                // ダミーリクエスト(1秒待機の後成功/失敗する)
-                const shouldSuccess = true;
-                const request = new Promise((resolve, reject) =>
-                    setTimeout(
-                        () =>
-                            shouldSuccess
-                                ? resolve()
-                                : reject(Error('login failure')),
-                        1000
-                    )
-                );
-
                 try {
-                    await request;
+                    // AnonymousTokenの取得
+                    const tokenRes = await this.$axios.$post(
+                        process.env.BASE_URL + '/rcms-api/3/token',
+                        {} // AnonymousUserでのトークン値取得要求のため、リクエストボディは空のオブジェクトを指定
+                    );
+                    const anonymousToken = tokenRes.access_token.value;
+
+                    // AnonymousTokenを適用したカスタムヘッダを作成
+                    const customHeaderConfig = {
+                        headers: {
+                            'X-RCMS-API-ACCESS-TOKEN': anonymousToken,
+                        },
+                    };
+
+                    // 新規会員登録のリクエスト
+                    await this.$axios.$post(
+                        process.env.BASE_URL + '/rcms-api/3/member/regist',
+                        { ...this.user }, // フォームの内容をリクエストボディとして適用
+                        customHeaderConfig
+                    );
+
                     this.signupDone = true;
+                    if ( this.signupDone ) {
+                        this.$router.push('/login')
+                    }
                 } catch (e) {
                     console.error(e);
                     this.error = 'エラーが発生しました。';

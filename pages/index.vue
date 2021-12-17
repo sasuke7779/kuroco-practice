@@ -1,24 +1,12 @@
 <template>
     <div>
-        <a href="/news">news</a>
-        <a href="/form">form</a>
-        <a href="/login">login</a>
+        <nuxt-link to="/news">news</nuxt-link>
+        <nuxt-link to="/form">form</nuxt-link>
+        <nuxt-link to="/login">login</nuxt-link>
+        <nuxt-link to="/login/signup">/login/signup</nuxt-link>
     </div>
 </template>
 
 <script>
-    export default {
-        async asyncData({ $axios }) {
-            try {
-                const response = await $axios.$get(
-                    process.env.BASE_URL + '/rcms-api/1/news'
-                );
-                console.log(response);
-                console.log(response.pageInfo.pageNo);
-                return { response };
-            } catch (e) {
-                console.log(e.message);
-            }
-        },
-    };
+    export default {};
 </script>
