@@ -42,6 +42,10 @@
                 <span v-if="col.type == 7">
                     <input :name="col.objKey" type="file" />
                 </span>
+                <span v-if="col.type == 3">
+                    <input :name="col.objKey" type="radio" :id="col.objKey"/>
+                    <label :for="col.objKey">{{col.options.label1}}</label>
+                </span>
                 <input v-else :name="col.objKey" type="text" />
             </div>
 
@@ -50,7 +54,7 @@
             </div>
         </form>
 
-        <form v-else>
+        <form v-else enctype="multipart/form-data">
             <div class="row--status">
                 <h2>問い合わせID</h2>
                 <div>{{ submittedId }}</div>
@@ -111,7 +115,6 @@
                 const body = formInputElements
                     .map((elm) => ({ [elm.name]: elm.value }))
                     .reduce((prev, cur) => ({ ...prev, ...cur }), {});
-
                 try {
                     // post data
                     const { id } = await this.$axios.$post(
