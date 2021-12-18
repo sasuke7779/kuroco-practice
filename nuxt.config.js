@@ -31,10 +31,6 @@ export default {
     '@/assets/css/module.css'
   ],
 
-  // router: {
-  //   trailingSlash: true
-  // },
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],

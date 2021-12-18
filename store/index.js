@@ -48,8 +48,7 @@ export const actions = {
         commit('setProfile', { profile: null })
         commit('updateLocalStorage', { rcmsApiAccessToken: null })
         commit('setAccessTokenOnRequestHeader', { rcmsApiAccessToken: null })
-            +
-            this.$router.push('/login')
+        this.$router.push('/login')
     },
     async restoreLoginState({ commit, dispatch }) {
         const rcmsApiAccessToken = localStorage.getItem('rcmsApiAccessToken')
