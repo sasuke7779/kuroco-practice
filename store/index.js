@@ -37,7 +37,6 @@ export const actions = {
         const profileRes = await this.$axios.$get(process.env.BASE_URL + '/rcms-api/3/profile')
         commit('setProfile', { profile: profileRes.data })
     },
-
     async logout({ commit }) {
         try {
             await this.$axios.$post(process.env.BASE_URL + '/rcms-api/3/logout')
@@ -50,6 +49,22 @@ export const actions = {
         commit('setAccessTokenOnRequestHeader', { rcmsApiAccessToken: null })
         this.$router.push('/login')
     },
+
+    async update({ commit }, payload) {
+        const endpointPath = '/rcms-api/3/member/update';
+        try {
+            await this.$axios.$post(
+                process.env.BASE_URL + endpointPath,
+                payload)
+
+            const profileRes = await this.$axios.$get(process.env.BASE_URL + '/rcms-api/3/profile')
+            commit('setProfile', { profile: profileRes.data });
+        } catch (error) {
+            console.log(error);
+            throw new Error('変更できませんでした。')
+        }
+    },
+
     async restoreLoginState({ commit, dispatch }) {
         const rcmsApiAccessToken = localStorage.getItem('rcmsApiAccessToken')
         const authenticated = typeof rcmsApiAccessToken === 'string' && rcmsApiAccessToken.length > 0
