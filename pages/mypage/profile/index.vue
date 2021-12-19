@@ -16,9 +16,10 @@
     export default {
         async asyncData({ $axios }) {
             try {
-                const profile = await $axios.$get(
-                    process.env.BASE_URL + '/rcms-api/3/profile'
+                const memberdetails = await $axios.$get(
+                    process.env.BASE_URL + '/rcms-api/3/member/details'
                 );
+                const profile = memberdetails.details
                 return { profile };
             } catch (e) {
                 console.log(e.message);
