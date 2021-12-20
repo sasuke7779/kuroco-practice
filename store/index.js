@@ -65,6 +65,19 @@ export const actions = {
         }
     },
 
+    async resetpassword({ commit }, payload) {
+        const endpointPath = '/rcms-api/3/reset/password';
+        try {
+            await this.$axios.$post(
+                process.env.BASE_URL + endpointPath,
+                payload)
+
+        } catch (error) {
+            console.log(error);
+            throw new Error('変更できませんでした。')
+        }
+    },
+
     async restoreLoginState({ commit, dispatch }) {
         const rcmsApiAccessToken = localStorage.getItem('rcmsApiAccessToken')
         const authenticated = typeof rcmsApiAccessToken === 'string' && rcmsApiAccessToken.length > 0
