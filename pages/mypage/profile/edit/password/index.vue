@@ -58,7 +58,7 @@
             async resetpassword() {
                 try {
                     const payload = {
-                        'login_id': this.profile['login_id'],
+                        'login_id': this.profile['email'],
                         'current_password': this.currentpassword,
                         'new_password': this.newpassword
                     };
