@@ -1,8 +1,0 @@
-/* ---------------------------------------------
-*   c-btn
---------------------------------------------- */
-.c-btn {
-    @media screen and (min-width: #{$breakpoint-sp + 1}px) {
-        @include hover-opacity();
-    }
-}
