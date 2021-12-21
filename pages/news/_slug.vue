@@ -11,11 +11,11 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import LinkList from "@/components/LinkList";
+    import LinkList from '@/components/LinkList';
     export default {
         middleware: 'auth',
         components: {
-            LinkList
+            LinkList,
         },
         async asyncData({ $axios, params }) {
             try {
@@ -30,8 +30,42 @@
                 console.log(e.message);
             }
         },
+        head() {
+            return {
+                title: this.response.details.subject,
+                meta: [
+                    {
+                        hid: 'description',
+                        name: 'description',
+                        content: 'partial description',
+                    },
+                    {
+                        hid: 'og:site_name',
+                        property: 'og:site_name',
+                        content: 'partial og:site_name',
+                    },
+                    { hid: 'og:type', property: 'og:type', content: 'website' },
+                    { hid: 'og:url', property: 'og:url', content: 'BASE_URL' },
+                    {
+                        hid: 'og:title',
+                        property: 'og:title',
+                        content: 'partial og:title',
+                    },
+                    {
+                        hid: 'og:description',
+                        property: 'og:description',
+                        content: 'partial og:description',
+                    },
+                    {
+                        hid: 'og:image',
+                        property: 'og:image',
+                        content: 'partial og:image',
+                    },
+                ],
+            };
+        },
         methods: {
             ...mapActions(['logout']),
-        }
+        },
     };
 </script>

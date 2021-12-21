@@ -8,14 +8,21 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'src',
+    title: 'common title',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'common description' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'common og:site_name' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'BASE_URL' },
+      { hid: 'og:title', property: 'og:title', content: 'common og:title' },
+      { hid: 'og:description', property: 'og:description', content: 'common og:description' },
+      { hid: 'og:image', property: 'og:image', content: 'common og:image' },
+      { name: 'twitter:card', content: 'summary_large_image' },　//twitterの画像サイズ
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
