@@ -3,9 +3,9 @@
         <h1>FORMページ</h1>
 
         <form v-if="!submitted" ref="form" enctype="multipart/form-data">
-            <div v-if="error" class="error">
+            <!-- <div v-if="error" class="error">
                 <p v-for="(err, idx) in error" :key="idx">{{ err }}</p>
-            </div>
+            </div> -->
 
             <div class="row--status">
                 <h2>フォーム名</h2>
@@ -38,11 +38,14 @@
 
             <div v-for="col in cols" :key="col.objKey" class="row--form">
                 <h2>[{{ col.title }}]</h2>
+                <div v-if="error" class="error">
+                    <p v-for="(err, idx) in errorDisplay(col.objKey)" :key="idx">{{ err }}</p>
+                </div>
                 <span v-if="col.type == 7">
                     <input :name="col.objKey" type="file" />
                 </span>
                 <span v-if="col.type == 3">
-                    <input :name="col.objKey" type="radio" :id="col.objKey"/>
+                    <input :name="col.objKey" type="radio" :id="col.objKey" />
                     <label :for="col.objKey">{{col.options.label1}}</label>
                 </span>
                 <input v-else :name="col.objKey" type="text" />
@@ -132,6 +135,17 @@
                 e.preventDefault();
                 this.submitted = false;
             },
+
+            errorDisplay(objKey) {
+                const error = this.error;
+                let errorArray = [];
+                error.map((item) => {
+                    if ( objKey == item.field ) {
+                        errorArray.push(item)
+                    }
+                })
+                return errorArray;
+            }
         },
     };
 </script>
