@@ -18,7 +18,7 @@ export default {
       { hid: 'description', name: 'description', content: 'common description' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'common og:site_name' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'BASE_URL' },
+      { hid: 'og:url', property: 'og:url', content: BASE_URL },
       { hid: 'og:title', property: 'og:title', content: 'common og:title' },
       { hid: 'og:description', property: 'og:description', content: 'common og:description' },
       { hid: 'og:image', property: 'og:image', content: 'common og:image' },

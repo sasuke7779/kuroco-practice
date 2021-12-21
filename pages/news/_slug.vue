@@ -37,24 +37,24 @@
                     {
                         hid: 'description',
                         name: 'description',
-                        content: 'partial description',
+                        content: 'partial description' + this.response.details.contents,
                     },
                     {
                         hid: 'og:site_name',
                         property: 'og:site_name',
-                        content: 'partial og:site_name',
+                        content: 'partial og:site_name' + this.response.details.subject,
                     },
                     { hid: 'og:type', property: 'og:type', content: 'website' },
                     { hid: 'og:url', property: 'og:url', content: 'BASE_URL' },
                     {
                         hid: 'og:title',
                         property: 'og:title',
-                        content: 'partial og:title',
+                        content: 'partial og:title' + this.response.details.subject,
                     },
                     {
                         hid: 'og:description',
                         property: 'og:description',
-                        content: 'partial og:description',
+                        content: 'partial og:description' + this.response.details.contents,
                     },
                     {
                         hid: 'og:image',
