@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LinkList></LinkList>
         <h1>mypage</h1>
         <p>ログイン状態でないと表示できない</p>
         <ul>
@@ -23,7 +24,12 @@
 </template>
 
 <script>
+    import LinkList from '@/components/LinkList';
     export default {
+        middleware: 'auth',
+        components: {
+            LinkList,
+        },
         async asyncData({ $axios }) {
             try {
                 const memberdetails = await $axios.$get(
@@ -35,7 +41,6 @@
                 console.log(e.message);
             }
         },
-        middleware: 'auth',
         methods: {},
     };
 </script>

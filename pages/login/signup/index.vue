@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LinkList></LinkList>
         <div v-if="!signupDone">
             <form @submit.prevent="signup">
                 <p v-if="error" :style="{ color: 'red' }">{{ error }}</p>
@@ -36,7 +37,11 @@
 </template>
 
 <script>
+    import LinkList from '@/components/LinkList';
     export default {
+        components: {
+            LinkList,
+        },
         data() {
             return {
                 signupDone: false,
@@ -69,8 +74,8 @@
                     );
 
                     this.signupDone = true;
-                    if ( this.signupDone ) {
-                        this.$router.push('/login')
+                    if (this.signupDone) {
+                        this.$router.push('/login');
                     }
                 } catch (e) {
                     console.error(e);

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" @click="logout">ログアウト</button>
+        <LinkList></LinkList>
         <h1 class="title">{{ response.details.subject }}</h1>
         <div class="post" v-html="response.details.contents"></div>
         <div>
@@ -11,8 +11,12 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import LinkList from "@/components/LinkList";
     export default {
         middleware: 'auth',
+        components: {
+            LinkList
+        },
         async asyncData({ $axios, params }) {
             try {
                 const response = await $axios.$get(

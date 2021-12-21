@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LinkList></LinkList>
         <h1>mypage > unsubscribe</h1>
         <p>ログイン状態でないと表示できない</p>
         <p v-if="updateStatus !== null" :style="{ color: resultMessageColor }">{{ resultMessage }}</p>
@@ -10,7 +11,12 @@
 </template>
 
 <script>
+    import LinkList from '@/components/LinkList';
     export default {
+        middleware: 'auth',
+        components: {
+            LinkList,
+        },
         async asyncData({ $axios }) {
             try {
                 const memberdetails = await $axios.$get(
@@ -28,7 +34,6 @@
                 resultMessage: null,
             };
         },
-        middleware: 'auth',
         computed: {
             resultMessageColor() {
                 switch (this.updateStatus) {

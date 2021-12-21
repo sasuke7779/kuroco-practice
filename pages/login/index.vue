@@ -7,12 +7,17 @@
 
         <div>
             <nuxt-link to="/news">ニュース一覧ページへ</nuxt-link>
+            <LinkList></LinkList>
         </div>
     </form>
 </template>
 
 <script>
+    import LinkList from '@/components/LinkList';
     export default {
+        components: {
+            LinkList,
+        },
         data() {
             return {
                 email: '',
@@ -35,7 +40,6 @@
         },
         methods: {
             async login() {
-
                 try {
                     const payload = {
                         email: this.email,

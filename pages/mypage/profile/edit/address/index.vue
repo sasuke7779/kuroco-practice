@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LinkList></LinkList>
         <h1>mypage > profile > edit/address</h1>
         <p>ログイン状態でないと表示できない</p>
         <form @submit.prevent="update">
@@ -15,7 +16,12 @@
 </template>
 
 <script>
+import LinkList from '@/components/LinkList';
     export default {
+        middleware: 'auth',
+        components: {
+            LinkList,
+        },
         async asyncData({ $axios }) {
             try {
                 const memberdetails = await $axios.$get(
@@ -33,7 +39,6 @@
                 resultMessage: null,
             };
         },
-        middleware: 'auth',
         computed: {
             resultMessageColor() {
                 switch (this.updateStatus) {

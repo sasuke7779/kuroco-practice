@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" @click="logout">ログアウト</button>
+        <LinkList></LinkList>
         <div v-for="n in response.list" :key="n.slug">
             <nuxt-link :to="'/news/'+ n.topics_id">{{n.ymd}} {{n.subject}}</nuxt-link>
         </div>
@@ -9,8 +9,12 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import LinkList from "@/components/LinkList";
     export default {
         middleware: 'auth',
+        components: {
+            LinkList
+        },
         async asyncData({ $axios }) {
             try {
                 const response = await $axios.$get(

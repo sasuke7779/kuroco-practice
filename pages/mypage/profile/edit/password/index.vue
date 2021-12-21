@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LinkList></LinkList>
         <h1>mypage > profile > edit/password</h1>
         <p>ログイン状態でないと表示できない</p>
         <form @submit.prevent="resetpassword">
@@ -21,7 +22,12 @@
 </template>
 
 <script>
+    import LinkList from '@/components/LinkList';
     export default {
+        middleware: 'auth',
+        components: {
+            LinkList,
+        },
         async asyncData({ $axios }) {
             try {
                 const memberdetails = await $axios.$get(
@@ -38,10 +44,9 @@
                 updateStatus: null,
                 resultMessage: null,
                 currentpassword: '',
-                newpassword: ''
+                newpassword: '',
             };
         },
-        middleware: 'auth',
         computed: {
             resultMessageColor() {
                 switch (this.updateStatus) {
@@ -58,9 +63,9 @@
             async resetpassword() {
                 try {
                     const payload = {
-                        'login_id': this.profile['email'],
-                        'current_password': this.currentpassword,
-                        'new_password': this.newpassword
+                        login_id: this.profile['email'],
+                        current_password: this.currentpassword,
+                        new_password: this.newpassword,
                     };
 
                     await this.$store.dispatch('resetpassword', payload);

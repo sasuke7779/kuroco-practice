@@ -1,13 +1,12 @@
 <template>
-    <div>
-        <nuxt-link to="/news">news</nuxt-link>
-        <nuxt-link to="/form">form</nuxt-link>
-        <nuxt-link to="/login">login</nuxt-link>
-        <nuxt-link to="/mypage">mypage</nuxt-link>
-        <nuxt-link to="/login/signup">/login/signup</nuxt-link>
-    </div>
+    <LinkList></LinkList>
 </template>
 
 <script>
-    export default {};
+    import LinkList from "@/components/LinkList";
+    export default {
+        components: {
+            LinkList
+        }
+    };
 </script>
