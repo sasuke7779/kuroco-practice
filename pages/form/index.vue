@@ -5,7 +5,7 @@
         <form v-if="!submitted" ref="form" enctype="multipart/form-data">
             <!-- <div v-if="error" class="error">
                 <p v-for="(err, idx) in error" :key="idx">{{ err }}</p>
-            </div> -->
+            </div>-->
 
             <div class="row--status">
                 <h2>フォーム名</h2>
@@ -94,6 +94,15 @@
                 })),
             };
         },
+        head() {
+            return {
+                script: [
+                    {
+                        src: 'https://www.google.com/recaptcha/enterprise.js?render=6LfAi7sdAAAAAAeNy_lDWib0V6aPPP6INHrROcI7',
+                    },
+                ],
+            };
+        },
         data: () => {
             return {
                 submitted: false,
@@ -108,28 +117,41 @@
             async handleOnSubmit(e) {
                 e.preventDefault();
 
-                // collect input elements
-                const formInputElements = Array.from(
-                    this.$refs.form.elements
-                ).filter((elm) => elm.tagName.toLowerCase() === 'input');
+                // reCAOTCHA
+                grecaptcha.enterprise.ready(function () {
+                    grecaptcha.enterprise
+                        .execute('6LfAi7sdAAAAAAeNy_lDWib0V6aPPP6INHrROcI7', {
+                            action: 'login',
+                        })
+                        .then(async function (token) {
+                            // collect input elements
+                            const formInputElements = Array.from(
+                                this.$refs.form.elements
+                            ).filter(
+                                (elm) => elm.tagName.toLowerCase() === 'input'
+                            );
 
-                // transform key:value inputs to an object
-                const body = formInputElements
-                    .map((elm) => ({ [elm.name]: elm.value }))
-                    .reduce((prev, cur) => ({ ...prev, ...cur }), {});
-                try {
-                    // post data
-                    const { id } = await this.$axios.$post(
-                        process.env.BASE_URL + `/rcms-api/1/formsend?id=${FORM_ID}`,
-                        body
-                    );
-                    this.error = null;
-                    this.submittedId = id;
-                    this.submitted = true;
-                } catch (e) {
-                    console.log(e);
-                    this.error = [`${e}`, ...e.response.data.errors];
-                }
+                            // transform key:value inputs to an object
+                            const body = formInputElements
+                                .map((elm) => ({ [elm.name]: elm.value }))
+                                .reduce((prev, cur) => ({ ...prev, ...cur }), {});
+                            try {
+                                // post data
+                                const { id } = await this.$axios.$post(
+                                    process.env.BASE_URL +
+                                        `/rcms-api/1/formsend?id=${FORM_ID}`,
+                                    body
+                                );
+                                this.error = null;
+                                this.submittedId = id;
+                                this.submitted = true;
+                            } catch (e) {
+                                console.log(e);
+                                this.error = [`${e}`, ...e.response.data.errors];
+                            }
+                        });
+                });
+                // reCAOTCHA
             },
             handleOnBack(e) {
                 e.preventDefault();
@@ -140,12 +162,12 @@
                 const error = this.error;
                 let errorArray = [];
                 error.map((item) => {
-                    if ( objKey == item.field ) {
-                        errorArray.push(item)
+                    if (objKey == item.field) {
+                        errorArray.push(item);
                     }
-                })
+                });
                 return errorArray;
-            }
+            },
         },
     };
 </script>
