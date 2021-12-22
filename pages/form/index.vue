@@ -116,6 +116,7 @@
             },
             async handleOnSubmit(e) {
                 e.preventDefault();
+                const _this = this;
 
                 // reCAOTCHA
                 grecaptcha.enterprise.ready(function () {
@@ -126,7 +127,7 @@
                         .then(async function (token) {
                             // collect input elements
                             const formInputElements = Array.from(
-                                this.$refs.form.elements
+                                _this.$refs.form.elements
                             ).filter(
                                 (elm) => elm.tagName.toLowerCase() === 'input'
                             );
@@ -137,17 +138,17 @@
                                 .reduce((prev, cur) => ({ ...prev, ...cur }), {});
                             try {
                                 // post data
-                                const { id } = await this.$axios.$post(
+                                const { id } = await _this.$axios.$post(
                                     process.env.BASE_URL +
                                         `/rcms-api/1/formsend?id=${FORM_ID}`,
                                     body
                                 );
-                                this.error = null;
-                                this.submittedId = id;
-                                this.submitted = true;
+                                _this.error = null;
+                                _this.submittedId = id;
+                                _this.submitted = true;
                             } catch (e) {
                                 console.log(e);
-                                this.error = [`${e}`, ...e.response.data.errors];
+                                _this.error = [`${e}`, ...e.response.data.errors];
                             }
                         });
                 });
